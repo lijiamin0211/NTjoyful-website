@@ -15,7 +15,7 @@
           "product.top": "Tops",
           "product.dress": "Dress",
           "product.seamless": "Seamless",
-          "product.coat": "Coats",
+          "product.coat": "Coats & Jackets",
           "product.pants": "Pants",
           "about.title": "About Us",
           "about.text": "Nantong Joyful Fashion Co., Ltd. is a garment trading & industrial company. The company is located in the famous textile and garment city—Nantong, Jiangsu, China, which is only 1.5 hours drive to Shanghai, the biggest business center in China. In 2021, the company officially moved the head office to Haobang Building, opening a new page in the 20-year history of the company.",
@@ -48,14 +48,14 @@
           "collection.top.title": "Top collection",
           "collection.dress.title": "Dress Collection",
           "collection.seamless.title":"Seamless Collection",
-          "collection.coat.title":"Coat Collection",
+          "collection.coat.title":"Coats and Jackets Collection",
           "collection.pants.title":"Pants Collection",
           //=============== Why Us ｜ 选择我们 ==============//
           "advantages.title": "Why Us - Your Fashion Collection",
           "advantages.factory.h2": "OUR FACTORIES",
           "advantages.qualifications.h2": "OUR QUALIFICATIONS",
           "advantages.strengths.h2": "OUR STRENGTHS",
-          "advantages.factory1": "Nantong Rainbow Factory",
+          "advantages.factory1": "Nantong Factory",
           "advantages.factory2": "Lianyungang Factory",
           "advantages.factory3": "Sample Center",
           "advantages.strengths.card1.h3" : "Quality Assurance",
@@ -239,7 +239,7 @@
       };
 
       const flagIcons = {
-        en: "https://flagcdn.com/24x18/us.png",
+        en: "https://flagcdn.com/24x18/gb.png",
         es: "https://flagcdn.com/24x18/es.png",
         zh: "https://flagcdn.com/24x18/cn.png"
       };
