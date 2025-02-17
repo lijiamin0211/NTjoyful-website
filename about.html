@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="about.pageTitle">About Us - Your Fashion Collection</title>
+  <link rel="icon" href="public/media/icon.png" type="image/x-icon">
+  <!-- Import Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Use the same external CSS for all pages -->
+  <link rel="stylesheet" href="public/css/style.css" />
+  <style>
+    /* About page specific styles */
+    
+    /* Section 1: Full-Page Video with Centered Text */
+    .fullpage-section {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .fullpage-section .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      padding: 20px;
+    }
+    .fullpage-section h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .fullpage-section p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+    
+    /* Alternating Sections (Sections 2-7) */
+    .alt-section {
+      display: flex;
+      align-items: center;
+      text-align: justify;
+      justify-content: center;
+      padding: 60px 20px;
+      min-height: 80vh;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .alt-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .alt-section .img-container {
+      flex: 0 0 50%;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+    }
+    .alt-section .text-container {
+      flex: 0 0 50%;
+      padding: 20px;
+    }
+    .alt-section .text-container h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .alt-section.reverse .text-container h2 {
+      text-align: right;
+    }
+
+    .alt-section .text-container p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .alt-section.reverse {
+      flex-direction: row-reverse;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .alt-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      .alt-section.reverse {
+        flex-direction: column;
+      }
+      .alt-section .img-container, 
+      .alt-section .text-container {
+        width: 100%;
+      }
+      .alt-section .img-container {
+        margin-bottom: 20px;
+        height: 300px;
+      }
+    }
+    
+    /* Additional Learn More Button Styles */
+    .learn-more-section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .learn-more-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: rgb(205, 161, 75);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      transition: background 0.3s ease;
+    }
+    .learn-more-btn:hover {
+      background: rgb(205, 161, 75);
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed Navigation Header -->
+  <header id="header">
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="public/media/logo.png" alt="Your Brand Logo">
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home"  >Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about" class="active">About Us</a></li>
+        <li>
+          <a href="products.html" data-i18n="nav.products">Products</a>
+          <ul>
+            <li><a href="product/top.html" data-i18n="product.top">Top</a></li>
+            <li><a href="product/dress.html" data-i18n="product.dress">Dress</a></li>
+            <li><a href="product/seamless.html" data-i18n="product.seamless">Seamless</a></li>
+            <li><a href="product/coats.html" data-i18n="product.coat">Coat</a></li>
+            <li><a href="product/pants.html" data-i18n="product.pants">Pants</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="advantages.html" data-i18n="nav.whyus">Why Us</a>
+        </li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- Language Selector: Fixed at Top-Right Corner -->
+  <div class="language-selector">
+    <button class="lang-btn">
+      <img src="https://flagcdn.com/24x18/us.png" alt="English">
+      <span class="lang-text">English</span>
+    </button>
+    <div class="lang-dropdown">
+      <a href="#" data-lang="en">
+        <img src="https://flagcdn.com/16x12/us.png" alt="English">
+        <span>English</span>
+      </a>
+      <a href="#" data-lang="es">
+        <img src="https://flagcdn.com/16x12/es.png" alt="Español">
+        <span>Español</span>
+      </a>
+      <a href="#" data-lang="zh">
+        <img src="https://flagcdn.com/16x12/cn.png" alt="中文">
+        <span>中文</span>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Section 1: Full-Page Video with Centered Text -->
+  <section class="fullpage-section">
+    <video autoplay muted loop playsinline class="bg-video">
+      <source src="public/media/about/about1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="content">
+      <h1 data-i18n="about.welcome">Welcome to Our Story</h1>
+      <p data-i18n="about.intro">
+        Discover the passion and creativity that fuels our journey from humble beginnings to global success.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Section 2: Image on Left, Text on Right -->
+  <section class="alt-section" id="about2">
+    <div class="img-container" style="background-image: url('public/media/about/about2.jpg');"></div>
+    <div class="text-container">
+      <h2 data-i18n="about.background.title">Company Background and Strategic Location</h2>
+      <p data-i18n="about.background.text">
+        Nantong Joyful Fashion Co., Ltd. is a well-established garment trading and industrial enterprise based in Nantong, Jiangsu, China—a city renowned for its textile and garment industry. With its strategic location just 1.5 hours from Shanghai, the company leverages its proximity to China’s largest business center. The relocation of the head office to Haobang Building in 2021 marked a significant new chapter in its 20-year history.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Section 3: Image on Right, Text on Left -->
+  <section class="alt-section reverse" id="about3">
+    <div class="img-container" style="background-image: url('public/media/about/about3.jpg');"></div>
+    <div class="text-container">
+      <h2 data-i18n="about.leadership.title">Leadership and Expert Workforce</h2>
+      <p data-i18n="about.leadership.text">
+        Under the dynamic leadership of Mr. Frank Zhang, Joyful has steadily grown into a leader among foreign trade enterprises in Nantong. The company boasts a dedicated team of professional foreign trade talents and an independent fabric development department, ensuring seamless communication with international clients and the timely acquisition of the latest global fabric trends.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Section 4: Image on Left, Text on Right -->
+  <section class="alt-section" id="about4">
+    <div class="img-container" style="background-image: url('public/media/about/about4.jpg');"></div>
+    <div class="text-container">
+      <h2 data-i18n="about.quality.title">Commitment to Quality and Innovative Design</h2>
+      <p data-i18n="about.quality.text">
+        At the core of Joyful’s operations is an unwavering commitment to quality. The company’s skilled pattern-making, workmanship, and quality control departments work in unison to translate design visions into meticulously crafted garments. By consistently prioritizing high-quality products and dedicated service, Joyful sets the standard for excellence in both domestic and international markets.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Section 5: Image on Right, Text on Left -->
+  <section class="alt-section reverse" id="about5">
+    <div class="img-container" style="background-image: url('public/media/about/about5.jpg');"></div>
+    <div class="text-container">
+      <h2 data-i18n="about.production.title">Advanced Production Capabilities and Operational Excellence</h2>
+      <p data-i18n="about.production.text">
+        Joyful’s operational backbone is reinforced by its modern production infrastructure. An independent sample center and state-of-the-art production lines ensure efficiency and timely delivery of samples and orders. With two self-owned garment factories—one in Nantong and another in Lian Yun Gang City—and partnerships with several sub-contractor factories, the company maintains rigorous quality control and smooth production flow from cutting to packing.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Section 6: Image on Left, Text on Right -->
+  <section class="alt-section" id="about6">
+    <div class="img-container" style="background-image: url('public/media/about/about6.jpg');"></div>
+    <div class="text-container">
+      <h2 data-i18n="about.brand.title">Brand Development and Market Expansion</h2>
+      <p data-i18n="about.brand.text">
+        Building on its extensive experience in producing high-end garments for renowned foreign brands, Joyful embarked on creating its own label. In 2018, the company began developing the Special Staying women’s fashion brand—an initiative that blends classical Italian aesthetics with contemporary cultural aspirations. Officially launched in October 2020, the brand’s “fashionable, elegant” positioning has resonated with confident, sophisticated women.
+      </p>
+    </div>
+  </section>
+
+  </section>
+  
+  <!-- Learn More Button Section -->
+  <section class="learn-more-section">
+    <a href="advantages.html" class="learn-more-btn" data-i18n="about.learnMore">Learn More</a>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <p data-i18n="footer.text">&copy; Copyright 2025 All Rights Reserved Joyful Fashion 苏ICP备2023052917号</p>
+  </footer>
+  
+  <!-- Intersection Observer for alternating sections -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const altSections = document.querySelectorAll('.alt-section');
+      const options = { threshold: 0.3 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible');
+          }
+        });
+      }, options);
+      altSections.forEach(section => observer.observe(section));
+    });
+  </script>
+  
+  <script src="public/js/language.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="products.title">Products - Your Fashion Collection</title>
+  <link rel="icon" href="public/media/icon.png" type="image/x-icon">
+  <!-- Import Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/style.css" />
+  <style>
+    /* Additional styles for the products page to ensure 5 cards in one row with uniform, larger icons */
+    /* Remove any zoom effects from product images */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin: 40px auto;
+      width: 80%;
+    }
+    .product-category {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .product-category:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .product-category img {
+      width: 100%;
+      min-height: calc(90vh - 60px);  /* Increased fixed height to make them longer */
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%); /* Icons appear greyed out by default */
+      transition: filter 0.3s ease;
+    }
+    .product-category:hover img {
+      filter: grayscale(0%); /* Full color on hover */
+    }
+    .product-category .category-title {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed Navigation Header -->
+  <header id="header">
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="public/media/logo.png" alt="Your Brand Logo">
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+        <li>
+          <a href="products.html" data-i18n="nav.products" class="active">Products</a>
+          <ul>
+            <li><a href="product/top.html" data-i18n="product.top">Top</a></li>
+            <li><a href="product/dress.html" data-i18n="product.dress">Dress</a></li>
+            <li><a href="product/seamless.html" data-i18n="product.seamless">Seamless</a></li>
+            <li><a href="product/coats.html" data-i18n="product.coat">Coat</a></li>
+            <li><a href="product/pants.html" data-i18n="product.pants">Pants</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="advantages.html" data-i18n="nav.whyus">Why Us</a>
+        </li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- Language Selector: Fixed at Top-Right Corner -->
+  <div class="language-selector">
+    <button class="lang-btn">
+      <img src="https://flagcdn.com/24x18/us.png" alt="English">
+      <span class="lang-text">English</span>
+    </button>
+    <div class="lang-dropdown">
+      <a href="#" data-lang="en">
+        <img src="https://flagcdn.com/16x12/us.png" alt="English">
+        <span>English</span>
+      </a>
+      <a href="#" data-lang="es">
+        <img src="https://flagcdn.com/16x12/es.png" alt="Español">
+        <span>Español</span>
+      </a>
+      <a href="#" data-lang="zh">
+        <img src="https://flagcdn.com/16x12/cn.png" alt="中文">
+        <span>中文</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Products Section -->
+  <section id="products" class="animate-on-scroll">
+    <div class="categories-grid">
+      <a href="product/top.html" class="product-category">
+        <img src="public/media/Cover/top.JPG" alt="Top">
+        <div class="category-title" data-i18n="product.top">Top</div>
+      </a>
+      <a href="product/dress.html" class="product-category">
+        <img src="public/media/Cover/dress.JPG" alt="Dress">
+        <div class="category-title" data-i18n="product.dress">Dress</div>
+      </a>
+      <a href="product/seamless.html" class="product-category">
+        <img src="public/media/Cover/seamless.JPG" alt="Seamless">
+        <div class="category-title" data-i18n="product.seamless">Seamless</div>
+      </a>
+      <a href="product/coats.html" class="product-category">
+        <img src="public/media/Cover/coat.JPG" alt="Coats">
+        <div class="category-title" data-i18n="product.coat">Coats</div>
+      </a>
+      <a href="product/pants.html" class="product-category">
+        <img src="public/media/Cover/pants.JPG" alt="Pants">
+        <div class="category-title" data-i18n="product.pants">Pants</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p data-i18n="footer.text">&copy; CopyRight 2024 All Right Reserved Joyful Fashion 苏ICP备2023052917号</p>
+  </footer>
+
+  <script src="public/js/main.js"></script>
+
+  <script src="public/js/language.js"></script>
+</body>
+</html>

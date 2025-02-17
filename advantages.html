@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="advantages.title">Why Us - Your Fashion Collection</title>
+  <link rel="icon" href="public/media/icon.png" type="image/x-icon">
+  <!-- Import Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/style.css" />
+  <style>
+    /* ===============================
+       Why Us (Factories) Section
+    =============================== */
+    #advantages {
+      padding: 20px 10px 80px;
+      background: #f9f9f9;
+      text-align: center;
+      position: relative;
+      margin-top: var(--header-height, 80px);
+    }
+    #advantages h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #333;
+    }
+    /* Mark the factories section heading for translation */
+    #advantages h2[data-i18n]::after {
+      content: "";
+    }
+    .factories-grid {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    .factory-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      flex: 1;
+      max-width: 33%;
+    }
+    .factory-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .factory-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+    .factory-card .factory-info {
+      padding: 20px;
+      text-align: center;
+    }
+    .factory-card .factory-info h3 {
+      font-size: 1.8rem;
+      margin: 0;
+      color: #333;
+    }
+    
+    /* ===============================
+       Modal for Factory Details
+    =============================== */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      max-width: 1200px;
+      width: 100%;
+      border-radius: 8px;
+      position: relative;
+      display: flex;
+      gap: 20px;
+      animation: modalExplosion 0.6s ease forwards;
+    }
+    @keyframes modalExplosion {
+      0% { transform: scale(0.8); opacity: 0; }
+      60% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    .modal-left {
+      position: relative;
+      flex: 0 0 60%;
+      height: 500px;
+    }
+    .modal-left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .modal-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+    .arrow-left { left: 10px; }
+    .arrow-right { right: 10px; }
+    .modal-arrow:hover { background: rgba(0,0,0,0.8); }
+    .modal-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .modal-right h3 {
+      margin-top: 0;
+      font-size: 2rem;
+    }
+    .modal-right p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #333;
+      color: #fff;
+      border: none;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+    
+    /* ===============================
+       Our Qualifications Section
+    =============================== */
+    #qualifications {
+      padding: 80px 20px;
+      background: #eee;
+      text-align: center;
+    }
+    #qualifications h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #333;
+    }
+    /* 外层容器，隐藏滚动溢出 */
+    .qualification-carousel {
+      overflow: hidden;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* 滚动轨道，使用 Flex 布局，并应用循环滚动动画 */
+    .scroll-track {
+      display: flex;
+      animation: scroll 30s linear infinite;
+    }
+
+    /* 每个小图盒子 */
+    .qualification-box {
+      flex: 0 0 auto;
+      width: 150px;    /* 根据实际需求调整 */
+      margin: 0 10px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 图片容器 */
+    .image-container {
+      width: 100%;
+      flex: 1;
+    }
+
+    /* 图片样式 */
+    .image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    /* Caption 容器 */
+    .caption-container {
+      margin-top: 10px;
+      height: 30px; /* 固定高度，确保每个盒子一致 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Caption 文本 */
+    .caption {
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    /* 定义滚动动画 */
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    
+    /* ===============================
+       Our Strengths Section
+    =============================== */
+    #strengths {
+      padding: 80px 20px;
+      background: white;
+      text-align: center;
+    }
+
+    #strengths h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #000;
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 翻转卡片整体容器 */
+    .flip-card {
+      background-color: transparent;
+      width: 100%;
+      height: 300px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    /* 内部容器，用于实现翻转动画 */
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    /* 翻转状态 */
+    .flip-card-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    /* 卡片正面与背面 */
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+    }
+    /* 背面样式：翻转后显示具体内容 */
+    .flip-card-back {
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 正面样式：居中显示标题和半透明灰色条 */
+    .flip-card-front {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /*position: relative;*/
+    }
+
+    .card-title-overlay {
+      background-color: rgba(128, 128, 128, 0.6);
+      padding: 10px 20px;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    .flip-card-front span {
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    /* 半透明覆盖层，用于确保背面文字清晰 */
+    .flip-card-back::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      z-index: 1;
+    }
+
+    /* 内容区域，放置在覆盖层之上，文字两端对齐 */
+    .flip-card-back .card-content {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: justify;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===============================
+       Modal for Qualification Details
+    =============================== */
+    .qual-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2100;
+      padding: 20px;
+    }
+    .qual-modal.active {
+      display: flex;
+    }
+    .qual-modal-content {
+      background: #fff;
+      padding: 20px;
+      max-width: 1500px;
+      width: 100%;
+      border-radius: 8px;
+      position: relative;
+      animation: modalExplosion 0.6s ease forwards;
+    }
+    .qual-modal-content iframe {
+      width: 100%;
+      height: 1000px;
+      border: none;
+    }
+    .qual-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #333;
+      color: #fff;
+      border: none;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+    
+    /* ===============================
+       Contact Button Section
+    =============================== */
+    .contact-button-section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .contact-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: rgb(205, 161, 75);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      transition: background 0.3s ease;
+    }
+    .contact-btn:hover {
+      background: rgb(205, 161, 75);
+    }
+    
+    /* ===============================
+       Responsive Adjustments
+    =============================== */
+    @media (max-width: 768px) {
+      .factories-grid {
+        flex-direction: column;
+      }
+      .factory-card {
+        max-width: 100%;
+      }
+      .modal-content {
+        flex-direction: column;
+      }
+      .modal-left {
+        width: 100%;
+        height: 300px;
+      }
+      .modal-right {
+        width: 100%;
+      }
+      .modal-arrow {
+        font-size: 1.5rem;
+        padding: 8px;
+      }
+      .qualifications-grid {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+      }
+      .strengths-grid {
+        grid-template-columns: 1fr;
+      }
+      .qual-modal-content iframe {
+        height: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+   <!-- Fixed Navigation Header -->
+   <header id="header">
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="public/media/logo.png" alt="Your Brand Logo">
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+        <li>
+          <a href="products.html" data-i18n="nav.products">Products</a>
+          <ul>
+            <li><a href="product/top.html" data-i18n="product.top">Top</a></li>
+            <li><a href="product/dress.html" data-i18n="product.dress">Dress</a></li>
+            <li><a href="product/seamless.html" data-i18n="product.seamless">Seamless</a></li>
+            <li><a href="product/coats.html" data-i18n="product.coat">Coat</a></li>
+            <li><a href="product/pants.html" data-i18n="product.pants">Pants</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="advantages.html" data-i18n="nav.whyus" class="active">Why Us</a>
+        </li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Language Selector: Fixed at Top-Right Corner -->
+  <div class="language-selector">
+    <button class="lang-btn">
+      <img src="https://flagcdn.com/24x18/us.png" alt="English">
+      <span class="lang-text">English</span>
+    </button>
+    <div class="lang-dropdown">
+      <a href="#" data-lang="en">
+        <img src="https://flagcdn.com/16x12/us.png" alt="English">
+        <span>English</span>
+      </a>
+      <a href="#" data-lang="es">
+        <img src="https://flagcdn.com/16x12/es.png" alt="Español">
+        <span>Español</span>
+      </a>
+      <a href="#" data-lang="zh">
+        <img src="https://flagcdn.com/16x12/cn.png" alt="中文">
+        <span>中文</span>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Factories / Why Us Section -->
+  <section id="advantages">
+    <h2 data-i18n="advantages.factory.h2">OUR FACTORIES</h2>
+    <div class="factories-grid">
+      <div class="factory-card" data-index="0">
+        <img src="public/media/factory/nt1.jpg" alt="Nantong Factory">
+        <div class="factory-info">
+          <!-- Added data-i18n for translations on card headings -->
+          <h3 data-i18n="advantages.factory1">Nantong Ranbow Factory</h3>
+        </div>
+      </div>
+      <div class="factory-card" data-index="1">
+        <img src="public/media/factory/yg3.jpg" alt="Lianyungang Factory">
+        <div class="factory-info">
+          <h3 data-i18n="advantages.factory2">Lianyungang Ranbow Factory</h3>
+        </div>
+      </div>
+      <div class="factory-card" data-index="2">
+        <img src="public/media/factory/sample1.jpg" alt="Sample Center">
+        <div class="factory-info">
+          <h3 data-i18n="advantages.factory3">Sample Center</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Modal for Factory Details -->
+  <div class="modal" id="factoryModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-left">
+        <button class="modal-arrow arrow-left" id="modalArrowLeft">&#10094;</button>
+        <img id="modalMainImage" src="" alt="Factory Detail">
+        <button class="modal-arrow arrow-right" id="modalArrowRight">&#10095;</button>
+      </div>
+      <div class="modal-right">
+        <h3 id="modalTitle"></h3>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Strengths Section -->
+<section id="strengths">
+  <h2 data-i18n="advantages.strengths.h2">OUR STRENGTHS</h2>
+  <div class="strengths-grid">
+    <!-- 卡片1：Quality Assurance -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front" style="background-image: url('public/media/strength/quality.jpg');">
+          <div class="card-title-overlay">
+            <span data-i18n="advantages.strengths.card1.h3">Quality Assurance</span>
+          </div>
+        </div>
+        <div class="flip-card-back" style="background-image: url('public/media/strength/quality.jpg');">
+          <div class="card-content">
+            <p data-i18n="advantages.strengths.card1.p">
+              Our company maintains rigorous quality assurance at every stage. From meticulous raw material inspections to precise cutting, stitching, and finishing, our experienced quality control team ensures that every garment meets high standards for durability, comfort, and style. We continuously refine our processes with state-of-the-art technology to guarantee consistent, premium quality in every piece.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+    <!-- 卡片2：Quick Response -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front" style="background-image: url('public/media/strength/quick.jpg');">
+          <div class="card-title-overlay">
+            <span data-i18n="advantages.strengths.card2.h3">Quick Response</span>
+          </div>
+        </div>
+        <div class="flip-card-back" style="background-image: url('public/media/strength/quick.jpg');">
+          <div class="card-content">
+            <p data-i18n="advantages.strengths.card2.p">
+              In the fast-paced world of fashion, speed is crucial. Our agile production process allows us to respond rapidly to your needs<br>
+              Material sourcing: 1 day<br>
+              Sample making: 1 week<br>
+              Quotation: 1 day<br>
+              Lead time: 1 month.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卡片3：Sustainable Material -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front" style="background-image: url('public/media/strength/sustainable.jpg');">
+          <div class="card-title-overlay">
+            <span data-i18n="advantages.strengths.card3.h3">Sustainable Material</span>
+          </div>
+        </div>
+        <div class="flip-card-back" style="background-image: url('public/media/strength/sustainable.jpg');">
+          <div class="card-content">
+            <p data-i18n="advantages.strengths.card3.p">
+              We are committed to environmental responsibility by prioritizing sustainable and ethically sourced fabrics. Our partnerships with certified suppliers ensure that every material we use not only meets high quality standards but also minimizes environmental impact. This dedication to green practices supports a healthier planet while meeting the growing consumer demand for eco-friendly fashion.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卡片4：Design Team -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front" style="background-image: url('public/media/strength/design.jpg');">
+          <div class="card-title-overlay">
+            <span data-i18n="advantages.strengths.card4.h3">Design Team</span>
+          </div>
+        </div>
+        <div class="flip-card-back" style="background-image: url('public/media/strength/design.jpg');">
+          <div class="card-content">
+            <p data-i18n="advantages.strengths.card4.p">
+              Our in-house design team is the creative engine behind our collections. Composed of talented, trend-savvy professionals, they fuse innovative ideas with practical expertise to transform concepts into wearable art. By closely monitoring global fashion trends and incorporating cutting-edge design techniques, they create distinctive, market-leading garments that capture the essence of modern style.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Qualifications Section (Horizontal Layout) -->
+  <section id="qualifications">
+    <h2>Our Qualifications</h2>
+    <div class="qualification-carousel">
+      <div class="scroll-track">
+        <!-- 原始6个项目 -->
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/gots.png" alt="GOTS Certifications">
+          </div>
+          <div class="caption-container">
+            <div class="caption">GOTS</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/grs.png" alt="GRS Certifications">
+          </div>
+          <div class="caption-container">
+            <div class="caption">GRS</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/oeko.png" alt="Quality Management Certificate">
+          </div>
+          <div class="caption-container">
+            <div class="caption">CICC</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/organic.png" alt="OCS Certificate">
+          </div>
+          <div class="caption-container">
+            <div class="caption">OCS</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/higg.png" alt="HIGG">
+          </div>
+          <div class="caption-container">
+            <div class="caption">HIGG</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/bsci.png" alt="BSCI">
+          </div>
+          <div class="caption-container">
+            <div class="caption">BSCI</div>
+          </div>
+        </div>
+        <!-- 重复一遍，实现无缝滚动 -->
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/gots.png" alt="GOTS Certifications">
+          </div>
+          <div class="caption-container">
+            <div class="caption">GOTS</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/grs.png" alt="GRS Certifications">
+          </div>
+          <div class="caption-container">
+            <div class="caption">GRS</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/oeko.png" alt="Quality Management Certificate">
+          </div>
+          <div class="caption-container">
+            <div class="caption">CICC</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/organic.png" alt="OCS Certificate">
+          </div>
+          <div class="caption-container">
+            <div class="caption">OCS</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/higg.png" alt="HIGG">
+          </div>
+          <div class="caption-container">
+            <div class="caption">HIGG</div>
+          </div>
+        </div>
+        <div class="qualification-box">
+          <div class="image-container">
+            <img src="public/media/strength/certi_logo/bsci.png" alt="BSCI">
+          </div>
+          <div class="caption-container">
+            <div class="caption">BSCI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  
+  <!-- Contact Button Section -->
+  <section class="contact-button-section">
+    <a href="contact.html" class="contact-btn" data-i18n="advantages.contactButton">Contact Us</a>
+  </section>
+  
+  <!-- Modal for Qualification Details -->
+  <div class="qual-modal" id="qualificationModal">
+    <div class="qual-modal-content">
+      <button class="qual-modal-close" id="qualModalClose">&times;</button>
+      <iframe id="qualificationIframe" src=""></iframe>
+    </div>
+  </div>
+  
+  <!-- Global Modal Translations for Factory Details -->
+  <script>
+    // Global translations for modal content (factory details)
+    var advantagesTranslations = {
+      en: {
+        "advantages.factory1.modalTitle": "Nantong Factory",
+        "advantages.factory1.modalDescription": "The factory is equipped with over 160 sets of modern knitting and woven garment manufacturing equipments. It produces 1.5 million pieces (sets) annually covering various fashions for women, children, and suits.",
+        "advantages.factory2.modalTitle": "Lianyungang Factory",
+        "advantages.factory2.modalDescription": "Rainbow Fashion (Lianyungang) Co., Ltd. is located in Jiangsu Province with four production lines, over 80 sewing employees, and 130 production equipments. It is a main production site for Nantong Joyful Fashion Co., Ltd.",
+        "advantages.factory3.modalTitle": "Sample Center",
+        "advantages.factory3.modalDescription": "The sample center specializes in making samples and small workshops for customers with an experienced team of paper makers, technicians, and skilled sample workers."
+      },
+      es: {
+        "advantages.factory1.modalTitle": "Fábrica de Nantong",
+        "advantages.factory1.modalDescription": "La fábrica cuenta con más de 160 conjuntos de equipos modernos de fabricación de prendas de punto y tejidos. Produce 1.5 millones de piezas (conjuntos) al año, abarcando diversas modas para mujeres, niños y trajes.",
+        "advantages.factory2.modalTitle": "Fábrica de Lianyungang",
+        "advantages.factory2.modalDescription": "Rainbow Fashion (Lianyungang) Co., Ltd. se encuentra en la provincia de Jiangsu con cuatro líneas de producción, más de 80 empleados de costura y 130 equipos de producción. Es un sitio principal de producción para Nantong Joyful Fashion Co., Ltd.",
+        "advantages.factory3.modalTitle": "Centro de Muestras",
+        "advantages.factory3.modalDescription": "El centro de muestras se especializa en la realización de muestras y pequeños talleres para clientes, con un equipo experimentado de realizadores de muestras, técnicos y obreros especializados."
+      },
+      zh: {
+        "advantages.factory1.modalTitle": "南通蓝波工厂",
+        "advantages.factory1.modalDescription": "该工厂配备了超过160套现代针织和梭织服装制造设备，年产服装达150万件（套），涵盖各类女装、童装和正装。",
+        "advantages.factory2.modalTitle": "连云港工厂",
+        "advantages.factory2.modalDescription": "连云港彩虹时尚有限公司位于江苏省，拥有四条生产线，超过80名缝纫员工和130台生产设备，是南通快乐时尚有限公司的主要生产基地。",
+        "advantages.factory3.modalTitle": "样品中心",
+        "advantages.factory3.modalDescription": "样品中心专注于为客户制作样品及小批量生产，拥有一支经验丰富的制版人员、技术人员和熟练的样品工人团队。"
+      }
+    };
+  </script>
+  
+  <!-- Factory Modal Functionality -->
+  <script>
+    // Update factoryDetails to use translation keys for modal content
+    const factoryDetails = {
+      0: {
+        titleKey: "advantages.factory1.modalTitle",
+        descriptionKey: "advantages.factory1.modalDescription",
+        images: ["public/media/factory/nt2.jpg", "public/media/factory/nt3.jpg", "public/media/factory/nt4.jpg", "public/media/factory/nt5.jpg"]
+      },
+      1: {
+        titleKey: "advantages.factory2.modalTitle",
+        descriptionKey: "advantages.factory2.modalDescription",
+        images: ["public/media/factory/yg2.jpg", "public/media/factory/yg1.jpg"]
+      },
+      2: {
+        titleKey: "advantages.factory3.modalTitle",
+        descriptionKey: "advantages.factory3.modalDescription",
+        images: ["public/media/factory/sample2.jpg", "public/media/factory/sample3.jpg"]
+      }
+    };
+
+    // Function to get the current language from localStorage (default: en)
+    function getCurrentLanguage() {
+      return localStorage.getItem('selectedLanguage') || 'en';
+    }
+
+    const factoryCards = document.querySelectorAll('.factory-card');
+    let currentModalImageIndex = 0;
+    factoryCards.forEach(card => {
+      card.addEventListener('click', function(){
+        const index = this.getAttribute('data-index');
+        const details = factoryDetails[index];
+        let currentLang = getCurrentLanguage();
+        // Use the global advantagesTranslations to get the modal title and description
+        document.getElementById('modalTitle').textContent = advantagesTranslations[currentLang][details.titleKey];
+        document.getElementById('modalDescription').textContent = advantagesTranslations[currentLang][details.descriptionKey];
+        currentModalImageIndex = 0;
+        document.getElementById('modalMainImage').src = details.images[currentModalImageIndex];
+        document.getElementById('factoryModal').setAttribute('data-factory-index', index);
+        document.getElementById('factoryModal').classList.add('active');
+      });
+    });
+    
+    function updateModalImage(factoryIndex, imageIndex) {
+      const details = factoryDetails[factoryIndex];
+      document.getElementById('modalMainImage').src = details.images[imageIndex];
+    }
+    
+    document.getElementById('modalArrowLeft').addEventListener('click', function(e){
+      e.stopPropagation();
+      const factoryIndex = document.getElementById('factoryModal').getAttribute('data-factory-index');
+      const details = factoryDetails[factoryIndex];
+      currentModalImageIndex = (currentModalImageIndex - 1 + details.images.length) % details.images.length;
+      updateModalImage(factoryIndex, currentModalImageIndex);
+    });
+    
+    document.getElementById('modalArrowRight').addEventListener('click', function(e){
+      e.stopPropagation();
+      const factoryIndex = document.getElementById('factoryModal').getAttribute('data-factory-index');
+      const details = factoryDetails[factoryIndex];
+      currentModalImageIndex = (currentModalImageIndex + 1) % details.images.length;
+      updateModalImage(factoryIndex, currentModalImageIndex);
+    });
+    
+    document.getElementById('modalClose').addEventListener('click', function(){
+      document.getElementById('factoryModal').classList.remove('active');
+    });
+    document.getElementById('factoryModal').addEventListener('click', function(e) {
+      if(e.target === this) {
+        this.classList.remove('active');
+      }
+    });
+  </script>
+  
+  <!-- Qualification Modal Functionality -->
+  <script>
+    const qualificationCards = document.querySelectorAll('.qualification-card');
+    qualificationCards.forEach(card => {
+      card.addEventListener('click', function(){
+        const pdfSrc = this.getAttribute('data-pdf');
+        document.getElementById('qualificationIframe').src = pdfSrc;
+        document.getElementById('qualificationModal').classList.add('active');
+      });
+    });
+    document.getElementById('qualModalClose').addEventListener('click', function(){
+      document.getElementById('qualificationModal').classList.remove('active');
+    });
+    document.getElementById('qualificationModal').addEventListener('click', function(e){
+      if(e.target === this) {
+        this.classList.remove('active');
+      }
+    });
+  </script>
+  
+  <script>
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const inner = this.querySelector('.flip-card-inner');
+        if(inner) {
+          inner.classList.toggle('flipped');
+        }
+      });
+    });
+  </script>
+  <script src="public/js/language.js"></script>
+   <!-- Footer -->
+   <footer>
+    <p data-i18n="footer.text">&copy; Copyright 2025 All Rights Reserved Joyful Fashion 苏ICP备2023052917号</p>
+  </footer>
+</body>
+</html>

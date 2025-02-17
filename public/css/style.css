@@ -1,0 +1,551 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --header-height: 60px; /* Initial header height */
+  --accent-color: rgb(205, 161, 75); /* Bright accent color */
+  --font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  font-family: var(--font-family), 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Header (Fixed Navigation) with Cool Scroll Effects */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: #111;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+}
+
+header.scrolled {
+  height: 60px; /* Shrinks the header */
+  background: rgba(17, 17, 17, 0.95); /* Slightly transparent/darker */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+header.scrolled .logo img {
+  height: 50px;
+}
+
+nav {
+  max-width: 1800px;
+  margin: 0 auto;
+  height: var(--header-height); /* 使 nav 高度与 header 一致 */
+  padding: 0 60px 0 10px; /* 去掉上下 padding，并减少左侧 padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 利用 flex 的特性垂直居中 */
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+/* --------------------- */
+/* Navigation & Submenu  */
+/* --------------------- */
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin-right: 80px;
+  text-transform: uppercase; /* 所有菜单文字大写 */
+}
+
+.nav-links li {
+  margin-left: 20px;
+  position: relative; /* 为子菜单定位提供参考 */
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: var(--accent-color);
+}
+
+/* 当前菜单项显示金色（请在当前页面对应的 a 标签上添加 .active 类） */
+.nav-links li a.active {
+  color: var(--accent-color);
+}
+
+/* Submenu 样式 */
+.nav-links li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #111;
+  padding: 10px 0;
+  min-width: 150px;
+  border-radius: 4px;
+  z-index: 200;
+  list-style: none;
+}
+
+.nav-links li:hover > ul {
+  display: block;
+}
+
+.nav-links li ul li {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li ul li a {
+  padding: 8px 15px;
+  font-size: 1rem;
+  display: block;
+  white-space: nowrap;
+}
+.nav-links li ul li a:hover {
+  background: var(--accent-color);
+}
+
+/* 如果需要整体左移文字，可保留此样式 */
+.nav-text {
+  transform: translateX(-40px);
+}
+
+/* --------------------- */
+/* Hero Section         */
+/* --------------------- */
+#hero {
+  min-height: calc(100vh - var(--header-height));
+  background: url('public/media/hero.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: var(--header-height);
+  animation: zoomBackground 20s ease-in-out infinite;
+}
+
+/* Background zoom animation */
+@keyframes zoomBackground {
+  0% { background-size: 100%; }
+  50% { background-size: 110%; }
+  100% { background-size: 100%; }
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+}
+
+/* Hero text animations */
+.hero-content h2,
+.hero-content p,
+.hero-content .btn {
+  opacity: 0;
+  animation: fadeInUp 1s forwards;
+}
+
+.hero-content h2 {
+  animation-delay: 0.3s;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  animation-delay: 0.6s;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.hero-content .btn {
+  animation-delay: 0.9s;
+  padding: 10px 20px;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+.hero-content .btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------- */
+/* Section Styling      */
+/* --------------------- */
+section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+/* Products Grid */
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.product {
+  width: 100%; /* Increased width for bigger images */
+  transition: transform 0.3s;
+}
+
+.product img {
+  width: 100%;
+  min-height: calc(90vh - 60px); /* Fixed height for uniformity */
+  object-fit: cover;
+  display: block;
+  border-radius: 5px;
+}
+
+.product h3 {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.product:hover {
+  transform: translateY(-10px);
+}
+
+footer {
+  padding: 20px;
+  background: #f1f1f1;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* --------------------- */
+/* Animation on Scroll  */
+/* --------------------- */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------- */
+/* About Section Styling */
+/* --------------------- */
+#about h2 {
+  margin-bottom: 40px;
+}
+
+#about .about-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px; /* Gap between video and text */
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  margin-top: 40px;
+}
+
+#about .about-video,
+#about .about-text {
+  flex: 1 1 500px;
+  max-width: 600px;
+}
+
+#about .about-video video {
+  width: 100%;
+  border-radius: 5px;
+}
+
+#about .about-text p {
+  line-height: 1.5;
+  font-size: 1.1rem;
+  margin-bottom: 1em;
+}
+
+#about .about-text .more-text {
+  display: none;
+}
+
+#about .about-text.expanded .more-text {
+  display: inline;
+}
+
+/* Read More Button */
+#about .read-more-btn {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-top: auto; /* pushes the button to the bottom */
+  border-radius: 4px;
+  font-size: 1rem;
+  position: absolute;
+  bottom: 70px;
+}
+
+
+/* Products a 标签 */
+.products .product a {
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.products .product a:hover {
+  color: #070707;
+  transform: translateY(-3px);
+}
+
+/* --------------------- */
+/* Additional Hero Overlay */
+/* --------------------- */
+#hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 5;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dot.active {
+  background: #fff;
+  transform: scale(1.1);
+}
+
+.dot:hover {
+  transform: scale(1.05);
+}
+
+/* --------------------- */
+/* Our Qualifications Section */
+/* --------------------- */
+#qualifications {
+  padding: 80px 20px;
+  background: #fff;
+  text-align: center;
+}
+
+#qualifications h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #000;
+}
+
+.qualifications-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns for 4 certificates */
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.qualification-card {
+  background: #f4f4f4;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.qualification-card:hover {
+  transform: scale(1.05);
+}
+
+.qualification-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.qualification-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .qualifications-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.qualification-card img {
+  width: 100%;
+  height: 300px; /* Increased from 200px for larger icons */
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+/* --------------------- */
+/* Fullpage Section */
+/* --------------------- */
+.fullpage-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* Add a dark overlay */
+.fullpage-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.fullpage-section .content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* --------------------- */
+/* Navigation & Language Selector */
+/* --------------------- */
+.language-selector {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 1000;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.lang-btn img {
+  width: 24px;
+  height: auto;
+  margin-right: 8px;
+}
+
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: black;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  min-width: 140px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.lang-dropdown a {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: white;
+  transition: background 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.lang-dropdown a:hover {
+  background: rgb(205, 161, 75);
+}
+
+.lang-dropdown img {
+  margin-right: 8px;
+  width: 16px;
+  height: auto;
+}

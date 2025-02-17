@@ -1,0 +1,266 @@
+    /* MAIN CONTAINER: LEFT SIDEBAR + RIGHT CONTENT */
+    .main-container {
+      display: flex;
+      min-height: calc(100vh - 200px);
+      margin-top: 60px; /* 与固定导航留出间隔 */
+      margin-bottom: 50px;
+      animation: fadeIn 1s ease-out 0.7s;
+      animation-fill-mode: both;
+    }
+
+    /* LEFT SIDEBAR (Category Navigation) */
+    .sidebar {
+      width: 250px;
+      background-color: #f9f9f9;
+      border-right: 1px solid #ccc;
+      padding: 20px;
+      position: fixed;      /* 固定定位 */
+      top: 60px;            /* 与 nav 高度匹配（根据实际 nav 高度调整） */
+      left: 0;
+      height: calc(100vh - 60px);  /* 充满剩余视口高度 */
+      overflow-y: auto;     /* 内容过长时允许滚动 */
+    }
+    .sidebar h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .sidebar ul { list-style: none; padding-left: 0; }
+    .sidebar li { margin-bottom: 0.8rem; }
+    .sidebar li a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #333;
+      display: inline-block;
+      padding: 4px 8px;
+    }
+    /* Hover 与 active 状态一致 */
+    .sidebar li a:hover,
+    .sidebar li a.active {
+      background-color: #000;
+      color: #fff;
+      width: 100%;
+    }
+
+    /* 右侧内容需要留出 sidebar 的宽度 */
+    .right-content {
+      margin-left: 250px;  /* 留出固定 sidebar 的宽度 */
+      padding: 10px 20px; 
+      flex: 1;
+    }
+    /* Top Collection Title放右侧 */
+    .collection-title {
+      text-align: left;
+      margin-bottom: 0px; 
+    }
+
+    .collection-title h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+    .collection-title h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background-color: #333;
+      margin-top: 0px;
+    }
+
+    /* PRODUCTS GRID: 固定每行4张图片 */
+    .products-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+      align-content: start;
+    }
+    /* PRODUCT ITEM STYLES */
+    .products-grid a {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      border: 1px solid #ddd;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      aspect-ratio: 2/3;
+    }
+    .products-grid a img {
+      width: 100%;
+      height: 100%;  /* 修改为 100% 使图片填满容器 */
+      object-fit: cover;  /* 保持图片比例并填充整个容器 */
+      display: block;
+    }
+    .products-grid a:hover img {
+      transform: scale(1.1);
+      filter: brightness(0.8);
+    }
+    .products-grid a::after {
+      content: "View Image";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .products-grid a:hover::after { opacity: 1; }
+
+    /* LIGHTBOX2 CUSTOMIZATIONS */
+    .lightboxOverlay { background: rgba(0, 0, 0, 0.8) !important; }
+    .lightbox,
+    .lb-outerContainer,
+    .lb-container,
+    .lb-dataContainer,
+    .lb-data,
+    .lb-details,
+    .lb-close,
+    .lb-loader {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .lb-number, .lb-caption { display: none !important; }
+    .lb-outerContainer {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      height: 100vh !important;
+    }
+    .lb-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+    }
+    .lb-image {
+      max-width: 80vw;
+      max-height: 80vh;
+      object-fit: contain !important;
+      display: block;
+      margin: 0;
+      border: none !important;
+      outline: none !important;
+    }
+    .lb-nav {
+      width: 500px !important;
+      height: 80vh !important;
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      pointer-events: none;
+    }
+    .lb-prev,
+    .lb-next {
+      pointer-events: auto;
+      position: absolute;
+      top: 50%;
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 2rem;
+      line-height: 50px;
+      text-align: center;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2000;
+      transform: translateY(-50%);
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    .lb-prev { left: 20px; }
+    .lb-next { right: 20px; }
+    .lightbox-left,
+    .lightbox-right {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .lightbox-left { left: 0; }
+    .lightbox-right { right: 0; }
+
+    /* seamless special*/
+
+    .right-content {
+      margin-left: 250px;
+      padding: 20px;
+      width: calc(100% - 250px);
+      overflow: hidden; /* 添加这行，隐藏超出右侧内容区域的部分 */
+    }
+
+    /* 产品列表翻页区域 */
+    .product-list {
+      /* 如果需要，可设置额外样式 */
+      margin-top: 20px;
+    }
+
+    /* 两页布局，宽度200%，每页占50% */
+    .page-container {
+      display: flex;
+      width: 200%;
+      transition: transform 0.5s ease;
+    }
+
+    /* 单页样式 */
+    .page {
+      width: 50%;
+      overflow-y: auto;
+      padding: 10px 0;
+    }
+    
+     /* 改进后的分页样式，左右箭头 */
+   
+    .arrow-nav {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .arrow-nav button {
+      background-color: #fff;           /* 按钮背景色 */
+      color: #333;                      /* 字体颜色 */
+      border: 1px solid #ccc;           /* 边框颜色 */
+      padding: 10px 16px;               /* 内边距 */
+      margin: 0 4px;                    /* 按钮间隔 */
+      font-size: 20px;                  /* 字体大小，适合显示箭头 */
+      border-radius: 5px;               /* 圆角 */
+      cursor: pointer;
+      transition: background-color 0.3s ease,
+                  color 0.3s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    .arrow-nav button:hover {
+      background-color: #333;           /* 鼠标悬停背景色 */
+      color: #fff;                      /* 鼠标悬停字体颜色 */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .arrow-nav button.active {
+      background-color: #000;           /* 活动状态背景色 */
+      border-color: #000;               /* 活动状态边框颜色 */
+      color: #fff;                      /* 活动状态字体颜色 */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .arrow-nav button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

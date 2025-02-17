@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dress - Your Fashion Collection</title>
+  <link rel="icon" href="../public/media/icon.png" type="image/x-icon">
+  <!-- Import Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../public/css/style.css" />
+  <link rel="stylesheet" href="product.css" />
+  <!-- Lightbox2 CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+  <!-- 你也可以在此处引入自己的外部CSS文件，例如:
+  <link rel="stylesheet" href="../public/css/style.css" />
+  -->
+</head>
+<body>
+  <!-- Fixed Navigation Header -->
+  <header id="header">
+    <nav>
+      <div class="logo">
+        <a href="../index.html">
+          <img src="../public/media/logo.png" alt="Your Brand Logo">
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-i18n="nav.home" >Home</a></li>
+        <li><a href="../about.html" data-i18n="nav.about">About Us</a></li>
+        <li>
+          <a href="../products.html" data-i18n="nav.products"  class="active">Products</a>
+          <ul>
+            <li><a href="top.html" data-i18n="product.top">Top</a></li>
+            <li><a href="dress.html" data-i18n="product.dress">Dress</a></li>
+            <li><a href="seamless.html" data-i18n="product.seamless">Seamless</a></li>
+            <li><a href="coats.html" data-i18n="product.coat">Coat</a></li>
+            <li><a href="pants.html" data-i18n="product.pants">Pants</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="../advantages.html" data-i18n="nav.whyus">Why Us</a>
+        </li>
+        <li><a href="../contact.html" data-i18n="nav.contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- Language Selector (Fixed at Top-Right) -->
+  <div class="language-selector">
+    <button class="lang-btn">
+      <img src="https://flagcdn.com/24x18/us.png" alt="English">
+      <span class="lang-text">English</span>
+    </button>
+    <div class="lang-dropdown">
+      <a href="#" data-lang="en">
+        <img src="https://flagcdn.com/16x12/us.png" alt="English">
+        <span>English</span>
+      </a>
+      <a href="#" data-lang="es">
+        <img src="https://flagcdn.com/16x12/es.png" alt="Español">
+        <span>Español</span>
+      </a>
+      <a href="#" data-lang="zh">
+        <img src="https://flagcdn.com/16x12/cn.png" alt="中文">
+        <span>中文</span>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Main Container: Sidebar + Right Content -->
+  <div class="main-container">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <h2 data-i18n="collection.title">Categories</h2>
+      <ul>
+        <li><a href="top.html" data-i18n="product.top">Top</a></li>
+        <li><a href="dress.html" data-i18n="product.dress">Dress</a></li>
+        <li><a href="seamless.html" data-i18n="product.dress" class="active">Seamless</a></li>
+        <li><a href="coats.html" data-i18n="product.coat">Coats</a></li>
+        <li><a href="pants.html" data-i18n="product.pants">Pants</a></li>
+      </ul>
+    </aside>
+
+    <!-- RIGHT CONTENT: Collection Title + Products Grid -->
+    <div class="right-content">
+      <!-- Dress Collection Title -->
+      <div class="collection-title">
+        <h1 data-i18n="collection.dress.title">Dress Collections</h1>
+      </div>
+      <!-- PRODUCTS GRID: 4 images per row -->
+      <section class="products-grid">
+        <a href="../public/media/产品/dress/dress_1.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_1.JPG" alt="Dress 1">
+        </a>
+        <a href="../public/media/产品/dress/dress_2.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_2.JPG" alt="Dress 2">
+        </a>
+        <a href="../public/media/产品/dress/dress_3.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_3.JPG" alt="Dress 3">
+        </a>
+        <a href="../public/media/产品/dress/dress_4.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_4.JPG" alt="Dress 4">
+        </a>
+        <a href="../public/media/产品/dress/dress_5.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_5.JPG" alt="Dress 5">
+        </a>
+        <a href="../public/media/产品/dress/dress_6.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_6.JPG" alt="Dress 6">
+        </a>
+        <a href="../public/media/产品/dress/dress_7.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_7.JPG" alt="Dress 7">
+        </a>
+        <a href="../public/media/产品/dress/dress_8.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_8.JPG" alt="Dress 8">
+        </a>
+        <a href="../public/media/产品/dress/dress_9.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_9.JPG" alt="Dress 9">
+        </a>
+        <a href="../public/media/产品/dress/dress_10.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_10.JPG" alt="Dress 10">
+        </a>
+        <a href="../public/media/产品/dress/dress_11.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_11.JPG" alt="Dress 11">
+        </a>
+        <a href="../public/media/产品/dress/dress_12.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_12.JPG" alt="Dress 12">
+        </a>
+        <a href="../public/media/产品/dress/dress_13.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_13.JPG" alt="Dress 13">
+        </a>
+        <a href="../public/media/产品/dress/dress_14.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_14.JPG" alt="Dress 14">
+        </a>
+        <a href="../public/media/产品/dress/dress_15.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_15.JPG" alt="Dress 15">
+        </a>
+        <a href="../public/media/产品/dress/dress_16.JPG" data-lightbox="dress-gallery">
+          <img src="../public/media/产品/dress/dress_16.JPG" alt="Dress 16">
+        </a>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p data-i18n="footer.text">&copy; Copyright 2025 All Rights Reserved Joyful Fashion 苏ICP备2023052917号</p>
+  </footer>
+  
+  <!-- Include jQuery (required for Lightbox2) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Lightbox2 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  <!-- Optional: your custom main.js
+  <script src="../public/js/main.js"></script>
+  -->
+  <script>
+    // Lightbox configuration: disable fade effects
+    lightbox.option({
+      fadeDuration: 0,
+      imageFadeDuration: 0,
+      resizeDuration: 0,
+    });
+
+    // 保留点击左右区域切换图片的功能
+    document.addEventListener("DOMContentLoaded", () => {
+      const lightboxContainer = document.querySelector(".lb-container");
+      if (lightboxContainer) {
+        const lightboxLeft = document.createElement("div");
+        const lightboxRight = document.createElement("div");
+
+        lightboxLeft.classList.add("lightbox-left");
+        lightboxRight.classList.add("lightbox-right");
+
+        lightboxLeft.addEventListener("click", () => { lightbox.prev(); });
+        lightboxRight.addEventListener("click", () => { lightbox.next(); });
+
+        lightboxContainer.appendChild(lightboxLeft);
+        lightboxContainer.appendChild(lightboxRight);
+      }
+    });
+  </script>
+  <script src="../public/js/language.js"></script>
+</body>
+</html>

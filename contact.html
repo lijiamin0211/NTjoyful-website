@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="contact.title">Contact Us - Your Fashion Collection</title>
+  <link rel="icon" href="public/media/icon.png" type="image/x-icon">
+  <!-- Import Montserrat font & Font Awesome for icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <style>
+    /* Main Contact Container */
+    #contact {
+      margin-top: var(--header-height, 80px);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    #contact h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    #contact h3 {
+      font-size: 1rem;
+      margin-bottom: 40px;
+      color: #555;
+    }
+    
+    /* Contact Methods Grid */
+    .contact-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto 60px;
+    }
+    .method-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      text-align: center;
+      cursor: pointer;
+    }
+    .method-card:hover {
+      transform: scale(1.02);
+    }
+    .method-card i {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: rgb(205, 161, 75);
+    }
+    .method-card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .method-card p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #555;
+    }
+    
+    /* Images & Map Layout */
+    .visuals-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .visuals-container img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      height: 300px;
+    }
+    /* Make the map wider */
+    .map-container {
+      grid-column: span 3;
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .contact-methods {
+        grid-template-columns: 1fr;
+      }
+      .visuals-container {
+        grid-template-columns: 1fr;
+      }
+      .map-container {
+        grid-column: span 1;
+        height: 300px;
+      }
+    }
+
+    /* Overlay */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 98;
+    }
+    #overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Pop-out Sidebar */
+    .popout-sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 25vw;
+      height: 100%;
+      background: #fff;
+      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 99;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .popout-sidebar.active {
+      transform: translateX(0);
+    }
+    /* Close Button */
+    #close-popout {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+    /* Pop-out Content */
+    .popout-content {
+      width: 100%;
+      text-align: justify;
+    }
+    .popout-content h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #333;
+      border-bottom: 2px solid rgb(205, 161, 75);
+      padding-bottom: 10px;
+    }
+    .popout-content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      color: #555;
+    }
+    .popout-content img {
+      display: block;
+      margin: 10px auto;
+      max-width: 200px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .center-email {
+      display: block;
+      text-align: center;
+      margin: 10px 0; /* 可根据需要调整间距 */
+    }
+    </style>
+</head>
+<body>
+  <!-- Navigation Header -->
+  <header id="header">
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="public/media/logo.png" alt="Your Brand Logo">
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+        <li>
+          <a href="products.html" data-i18n="nav.products">Products</a>
+          <ul>
+            <li><a href="product/top.html">Top</a></li>
+            <li><a href="prodcut/dress.html">Dress</a></li>
+            <li><a href="seamless.html">Seamless</a></li>
+            <li><a href="coats.html">Coat</a></li>
+            <li><a href="pants.html">Pants</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="advantages.html" data-i18n="nav.whyus">Why Us</a>
+         </li>
+        <li><a href="contact.html" data-i18n="nav.contact" class="active">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- Language Selector: Fixed at Top-Right Corner -->
+  <div class="language-selector">
+    <button class="lang-btn">
+      <img src="https://flagcdn.com/24x18/us.png" alt="English">
+      <span class="lang-text">English</span>
+    </button>
+    <div class="lang-dropdown">
+      <a href="#" data-lang="en">
+        <img src="https://flagcdn.com/16x12/us.png" alt="English">
+        <span>English</span>
+      </a>
+      <a href="#" data-lang="es">
+        <img src="https://flagcdn.com/16x12/es.png" alt="Español">
+        <span>Español</span>
+      </a>
+      <a href="#" data-lang="zh">
+        <img src="https://flagcdn.com/16x12/cn.png" alt="中文">
+        <span>中文</span>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Contact Section -->
+  <section id="contact">
+    <h1 data-i18n="contact.h1">HOW TO CONTACT JOYFUL CLIENT SERVICES</h1>
+    <h3 data-i18n="contact.h3">Choose your preferred method of contact and connect with us</h3>
+    
+    <!-- Contact Methods Grid -->
+    <div class="contact-methods">
+      <!-- Phone -->
+      <div class="method-card" data-method="phone">
+        <i class="fas fa-phone-alt"></i>
+        <h2 data-i18n="method.phone.title">PHONE</h2>
+        <!-- 更新为实际电话号码 -->
+        <p>+86-513-68252980</p>
+      </div>
+      <!-- Email -->
+      <div class="method-card" data-method="email">
+        <i class="fas fa-envelope"></i>
+        <h2 data-i18n="method.email.title">EMAIL</h2>
+        <!-- 更新为实际邮箱地址，支持多个邮箱 -->
+        <p>
+          <strong>frank@ntjoyful.com</strong><br>
+        </p>
+      </div>
+      <!-- Address -->
+      <div class="method-card" data-method="address">
+        <i class="fas fa-map-marker-alt"></i>
+        <h2 data-i18n="method.address.title">ADDRESS</h2>
+        <!-- 更新为实际地址信息 -->
+        <p data-i18n="method.address.content">Nantong, Jiangsu, China<br>
+        </p>
+      </div>
+      <!-- WeChat -->
+      <div class="method-card" data-method="wechat">
+        <i class="fab fa-weixin"></i>
+        <h2 data-i18n="method.wechat.title">WECHAT</h2>
+        <p>ntfrank</p>
+      </div>
+    </div>
+
+    <!-- Visuals & Map -->
+    <div class="visuals-container">
+      <img src="public/media/contact/contact4.jpg" alt="Office">
+      <img src="public/media/contact/contact2.jpg" alt="Factory">
+      <img src="public/media/contact/contact3.jpg" alt="Showroom">
+      
+      <!-- Bigger Map -->
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6762.339698144318!2d120.85953507611498!3d32.06465452004904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35b177bab9ff0345%3A0xd96aa17709fcede3!2sHaobang%20Building!5e0!3m2!1sen!2sus!4v1739354909119!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Overlay Element -->
+  <div id="overlay"></div>
+
+  <!-- New Pop-out Sidebar -->
+  <div id="popout" class="popout-sidebar">
+    <button id="close-popout">&times;</button>
+    <div class="popout-content">
+      <!-- Dynamic content will be injected here -->
+    </div>
+  </div>
+
+  <!-- JavaScript for Pop-out Functionality -->
+  <script>
+    // Update the popout content based on the method clicked
+    function updatePopoutContent(method) {
+      // Retrieve current language (default to 'en')
+      const lang = localStorage.getItem('selectedLanguage') || 'en';
+      const popoutTranslations = {
+        en: {
+          "contact.popout.phone": `
+            <h2>Phone Contact</h2>
+            <p>Get in touch with us over the phone. Our team is ready to assist you with any inquiries you may have. Please call <strong>+86-513-68252980</strong> during our working hours (Beijing Time 8am - 6pm).</p>`,
+          "contact.popout.email": `
+            <h2>Email Contact</h2>
+            <p>Send us an email and we'll get back to you as soon as possible. For any questions or comments, please email 
+            <span class="center-email">
+            <strong>frank@ntjoyful.com</strong><br>
+            <strong>ntfrank@vip.163.com</strong>
+            </span>
+            We typically respond within 24 hours.</p>`,
+          "contact.popout.address": `
+            <h2>Office Address</h2>
+            <p>
+              16-17 Floor, Haobang Building,<br>
+              No.300, Beidajie Street,<br>
+              Nantong, Jiangsu, China<br>
+              Postal Code: 226011
+            </p>
+            <p>Feel free to visit us during business hours.</p>`,
+          "contact.popout.wechat": `
+            <h2>WeChat Contact</h2>
+            <p>Connect with us on WeChat for instant support and updates. Our WeChat ID is <strong>ntfrank</strong>. Simply search and add us!</p>
+            <img src="public/media/contact/QR.png" alt="WeChat QR Code">`
+        },
+        es: {
+          "contact.popout.phone": `
+            <h2>Contacto Telefónico</h2>
+            <p>Ponte en contacto con nosotros por teléfono. Nuestro equipo está listo para ayudarte con cualquier consulta. Por favor llama al <strong>+86-513-68252980</strong> durante nuestro horario de atención (9am - 5pm).</p>`,
+          "contact.popout.email": `
+            <h2>Contacto por Correo</h2>
+            <p>Envíanos un correo y te responderemos lo antes posible. Para cualquier pregunta o comentario, por favor envía un correo a <span class="center-email">
+            <strong>frank@ntjoyful.com</strong><br>
+            <strong>ntfrank@vip.163.com</strong>
+            </span>
+            Normalmente respondemos en 24 horas.</p>`,
+          "contact.popout.address": `
+            <h2>Dirección de la Oficina</h2>
+            <p>
+              Piso 16-17, Edificio Haobang,<br>
+              N°300, Calle Beidajie,<br>
+              Nantong, Jiangsu, China<br>
+              Código Postal: 226011
+            </p>
+            <p>¡Siéntete libre de visitarnos durante el horario laboral!</p>`,
+          "contact.popout.wechat": `
+            <h2>Contacto por WeChat</h2>
+            <p>Conéctate con nosotros a través de WeChat para obtener soporte e información al instante. Nuestro ID de WeChat es <strong>ntfrank</strong>. ¡Búscanos y agréganos!</p>
+            <img src="public/media/contact/QR.png" alt="WeChat QR Code">`
+        },
+        zh: {
+          "contact.popout.phone": `
+            <h2>电话联系</h2>
+            <p>请通过电话与我们联系。我们的团队随时准备回答您的任何问题。工作时间（北京时间8:00-18:00）请拨打 <strong>+86-513-68252980</strong>。</p>`,
+          "contact.popout.email": `
+            <h2>电子邮件联系</h2>
+            <p>请给我们发送电子邮件，我们会尽快回复。若有任何问题或建议，请发送邮件至 
+            <span class="center-email">
+            <strong>frank@ntjoyful.com</strong><br>
+            <strong>ntfrank@vip.163.com</strong>
+            </span>
+            我们通常会在24小时内回复。</p>`,
+          "contact.popout.address": `
+            <h2>办公地址</h2>
+            <p>
+              江苏省南通市北大街300号<br>
+              豪邦大厦16-17楼<br>
+              邮编：226011
+            </p>
+            <p>欢迎在工作时间内前来拜访。</p>`,
+          "contact.popout.wechat": `
+            <h2>微信联系</h2>
+            <p>欢迎通过微信与我们取得联系，以获得即时支持和信息更新。我们的微信号是 <strong>ntfrank</strong>。搜索并添加我们吧！</p>
+            <img src="public/media/contact/QR.png" alt="WeChat QR Code">`
+        }
+      };
+
+      const popoutContent = document.querySelector('#popout .popout-content');
+      let key = "";
+      switch(method) {
+         case 'phone': key = "contact.popout.phone"; break;
+         case 'email': key = "contact.popout.email"; break;
+         case 'address': key = "contact.popout.address"; break;
+         case 'wechat': key = "contact.popout.wechat"; break;
+         default: key = "";
+      }
+      if(key && popoutTranslations[lang] && popoutTranslations[lang][key]) {
+         popoutContent.innerHTML = popoutTranslations[lang][key];
+      } else {
+         popoutContent.innerHTML = `<h2>Contact Details</h2><p>Please select a method to see more details.</p>`;
+      }
+    }
+
+    // Show overlay and sidebar when a method card is clicked
+    document.querySelectorAll('.method-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const method = this.getAttribute('data-method');
+        updatePopoutContent(method);
+        document.getElementById('overlay').classList.add('active');
+        document.getElementById('popout').classList.add('active');
+      });
+    });
+
+    // Hide pop-out when clicking on the overlay or the close button
+    document.getElementById('overlay').addEventListener('click', function() {
+      this.classList.remove('active');
+      document.getElementById('popout').classList.remove('active');
+    });
+    document.getElementById('close-popout').addEventListener('click', function() {
+      document.getElementById('overlay').classList.remove('active');
+      document.getElementById('popout').classList.remove('active');
+    });
+  </script>
+  
+  <script src="public/js/language.js"></script>
+  <!-- Footer -->
+  <footer>
+    <p data-i18n="footer.text">&copy; Copyright 2025 All Rights Reserved Joyful Fashion 苏ICP备2023052917号</p>
+  </footer>
+</body>
+</html>

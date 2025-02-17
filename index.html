@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="public/media/icon.png" type="image/x-icon">
+  <title>Your Fashion Products</title>
+  <!-- Import Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/style.css" />
+  <style>
+    /* === Existing Styles (unchanged) === */
+    /* Hero Section Adjustments */
+    #hero {
+      position: relative;
+      height: calc(100vh - 60px);
+      margin-top: 60px;
+      overflow: hidden;
+    }
+    /* Dark overlay to boost text visibility */
+    #hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+    .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide.active {
+      opacity: 1;
+    }
+    .slide .bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: var(--img);
+      background-size: cover;
+      background-position: center;
+      filter: blur(20px);
+      transform: scale(1.1);
+      z-index: 1;
+    }
+    .slide img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: 2;
+    }
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 5;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .dot.active {
+      background: rgba(255, 255, 255, 1);
+    }
+    /* Centered hero content */
+    .hero-content {
+      position: absolute;
+      z-index: 6;
+      color: #fff;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    /* About Us Section Styling */
+    #about {
+      padding: 40px 20px;
+      background: #ffffff;
+    }
+    .about-container {
+      background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+    .about-video {
+      flex: 1 1 400px;
+    }
+    .about-video iframe {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .about-text {
+      flex: 1 1 400px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #333;
+    }
+    .about-text p {
+      margin-bottom: 20px;
+    }
+    /* Updated Read More Button (Learn More) - now gold */
+    .read-more-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgb(205, 161, 75); /* gold background */
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    .read-more-btn:hover {
+      background: rgb(205, 161, 75);
+    }
+
+    /* Product Section */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 40px 20px;
+      background: #ffffff;
+    }
+    .product {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .product img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product h3 {
+      padding: 15px;
+      text-align: center;
+      font-size: 1.2rem;
+      margin: 0;
+      background: #f7f7f7;
+      color: #333;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    /* Why Us Section container */
+    #advantage {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    #advantage h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    /* Grid layout for three images */
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* Each adv-item and its frame */
+    .adv-item a {
+      display: block;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .adv-frame {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+
+    /* Image fills the frame and scales on hover */
+    .adv-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    /* Gray overlay covering the image initially */
+    .adv-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(128, 128, 128, 0.5);
+      transition: opacity 0.3s ease;
+    }
+
+    /* Centered gray bar with white text */
+    .adv-bar {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width:100%;
+      transform: translate(-50%, -50%);
+      background: gray;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Hover effect: scale image and fade out overlay */
+    .adv-frame:hover img {
+      transform: scale(1.2);
+    }
+
+    .adv-frame:hover .adv-overlay {
+      opacity: 0;
+    }
+
+    /* Contact Section Styling */
+    #contact {
+      padding: 40px 20px;
+      background: #fff;
+      text-align: center;
+    }
+    #contact h2 {
+      margin-bottom: 20px;
+    }
+    #contact p {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 1.1rem;
+    }
+    #contact .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgb(205, 161, 75);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    #contact .btn:hover {
+      background: #555;
+    }
+
+    /* Other sections (Products, etc.) remain unchanged... */
+  </style>
+</head>
+<body>
+  <!-- Fixed Navigation Header -->
+  <header id="header">
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="public/media/logo.png" alt="Your Brand Logo">
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home"  class="active">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+        <li>
+          <a href="products.html" data-i18n="nav.products">Products</a>
+          <ul>
+            <li><a href="product/top.html" data-i18n="product.top">Top</a></li>
+            <li><a href="product/dress.html" data-i18n="product.dress">Dress</a></li>
+            <li><a href="product/seamless.html" data-i18n="product.seamless">Seamless</a></li>
+            <li><a href="product/coats.html" data-i18n="product.coat">Coat</a></li>
+            <li><a href="product/pants.html" data-i18n="product.pants">Pants</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="advantages.html" data-i18n="nav.whyus">Why Us</a>
+        </li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- Language Selector -->
+  <div class="language-selector">
+    <button class="lang-btn">
+      <img src="https://flagcdn.com/24x18/us.png" alt="English">
+      <span class="lang-text">English</span>
+    </button>
+    <div class="lang-dropdown">
+      <a href="#" data-lang="en">
+        <img src="https://flagcdn.com/16x12/us.png" alt="English">
+        <span>English</span>
+      </a>
+      <a href="#" data-lang="es">
+        <img src="https://flagcdn.com/16x12/es.png" alt="Español">
+        <span>Español</span>
+      </a>
+      <a href="#" data-lang="zh">
+        <img src="https://flagcdn.com/16x12/cn.png" alt="中文">
+        <span>中文</span>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Hero Section with Slider -->
+  <section id="hero">
+    <div class="slider">
+      <div class="slides">
+        <div class="slide active" style="--img: url('public/media/home/hero1.png');">
+          <a href="products.html">
+            <div class="bg"></div>
+            <img src="public/media/home/hero1.png" alt="Hero Image 1">
+          </a>
+        </div>
+        <div class="slide" style="--img: url('public/media/home/hero2.png');">
+          <a href="products.html">
+            <div class="bg"></div>
+            <img src="public/media/home/hero2.png" alt="Hero Image 2">
+          </a>
+        </div>
+        <div class="slide" style="--img: url('public/media/home/hero3.png');">
+          <a href="products.html">
+            <div class="bg"></div>
+            <img src="public/media/home/hero3.png" alt="Hero Image 3">
+          </a>
+        </div>
+        <div class="slide" style="--img: url('public/media/home/hero4.png');">
+          <a href="products.html">
+            <div class="bg"></div>
+            <img src="public/media/home/hero4.png" alt="Hero Image 4">
+          </a>
+        </div>
+        <div class="slide" style="--img: url('public/media/home/hero5.png');">
+          <a href="products.html">
+            <div class="bg"></div>
+            <img src="public/media/home/hero5.png" alt="Hero Image 5">
+          </a>
+        </div>
+        <div class="slide" style="--img: url('public/media/home/hero6.png');">
+          <a href="products.html">
+            <div class="bg"></div>
+            <img src="public/media/home/hero6.png" alt="Hero Image 6">
+          </a>
+        </div>
+        <div class="slide" style="--img: url('public/media/home/hero7.png');">
+          <a href="products.html">
+            <div class="bg"></div>
+            <img src="public/media/home/hero7.png" alt="Hero Image 7">
+          </a>
+        </div>
+      </div>
+      <div class="dots">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+        <span class="dot" data-index="3"></span>
+        <span class="dot" data-index="4"></span>
+        <span class="dot" data-index="5"></span>
+        <span class="dot" data-index="6"></span>
+      </div>
+    </div>
+    <div class="hero-content">
+      <h2 data-i18n="hero.title">Elegance Redefined</h2>
+      <p data-i18n="hero.subtitle">Discover our exclusive women's products</p>
+      <a href="#products" class="btn" data-i18n="hero.button">Explore Products</a>
+    </div>
+  </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="animate-on-scroll">
+      <h2 data-i18n="about.title">About Us</h2>
+      <div class="about-container">
+        <div class="about-video">
+          <!-- Added an id to the iframe so we can update its src based on language -->
+          <iframe
+            id="about-video-iframe"
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/ZJrPG9CiVN8" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        
+        <div class="about-text">
+          <p data-i18n="about.text">
+            Nantong Joyful Fashion Co., Ltd. is a garment trading & industrial company. The company is located in the famous textile and garment city—Nantong, Jiangsu, China, which is only 1.5 hours drive to Shanghai, the biggest business center in China. In 2021, the company officially moved the head office to Haobang Building, opening a new page in the 20-year history of the company.
+          </p>
+          <a href="about.html" class="read-more-btn" data-i18n="about.button">Read More</a>
+        </div>
+      </div>
+    </section>
+  <!-- Prodcut Section with Fade-In on Scroll -->
+  <section id="products" class="animate-on-scroll">
+    <h2 data-i18n="products.title">Products</h2>
+    <div class="products">
+      <div class="product">
+        <a href="top.html">
+          <img src="public/media/Cover/top.JPG" alt="Top" />
+          <h3 data-i18n="product.top">Tops</h3>
+        </a>
+      </div>
+      <div class="product">
+        <a href="dress.html">
+          <img src="public/media/Cover/dress.JPG" alt="Dress" />
+          <h3 data-i18n="product.dress">Dress</h3>
+        </a>
+      </div>
+      <div class="product">
+        <a href="seamless.html">
+          <img src="public/media/Cover/seamless.JPG" alt="Seamless" />
+          <h3 data-i18n="product.seamless">Seamless</h3>
+        </a>
+      </div>
+      <div class="product">
+        <a href="coats.html">
+          <img src="public/media/Cover/coat.JPG" alt="Coats" />
+          <h3 data-i18n="product.coat">Coats</h3>
+        </a>
+      </div>
+      <div class="product">
+        <a href="pants.html">
+          <img src="public/media/Cover/pants.JPG" alt="Pants" />
+          <h3 data-i18n="product.pants">Pants</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us Section -->
+  <section id="advantage" class="animate-on-scroll">
+    <h2 data-i18n="advantage.title">Why Us</h2>
+    <div class="adv-grid">
+      <div class="adv-item">
+        <a href="advantages.html">
+          <div class="adv-frame">
+            <img src="public/media/factory/nt5.jpg" alt="factory">
+            <div class="adv-overlay"></div>
+            <div class="adv-bar" data-i18n="advantage.factory">Factory</div>
+          </div>
+        </a>
+      </div>
+      <div class="adv-item">
+        <a href="advantages.html">
+          <div class="adv-frame">
+            <img src="public/media/home/certificate.png" alt="certificate">
+            <div class="adv-overlay"></div>
+            <div class="adv-bar" data-i18n="advantage.certificate">Qualification</div>
+          </div>
+        </a>
+      </div>
+      <div class="adv-item">
+        <a href="advantages.html">
+          <div class="adv-frame">
+            <img src="public/media/home/why_us3.JPG" alt="strength">
+            <div class="adv-overlay"></div>
+            <div class="adv-bar" data-i18n="advantage.strength">Strengths</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Contact Section -->
+  <section id="contact" class="animate-on-scroll">
+    <h2 data-i18n="contact.title">Contact</h2>
+    <p data-i18n="contact.text">Get in touch with us for collaborations and inquiries.</p>
+    <a href="contact.html" class="btn" data-i18n="contact.button">Contact Us</a>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <p data-i18n="footer.text">&copy; Copyright 2025 All Rights Reserved Joyful Fashion 苏ICP备2023052917号</p>
+  </footer>
+  
+  <!-- Slider Script -->
+  <script src="public/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('#hero .slide');
+      const dots = document.querySelectorAll('#hero .dot');
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+      const intervalTime = 7000;
+      let slideInterval;
+      
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+        currentIndex = index;
+      }
+      
+      function nextSlide() {
+        let nextIndex = (currentIndex + 1) % totalSlides;
+        showSlide(nextIndex);
+      }
+      
+      slideInterval = setInterval(nextSlide, intervalTime);
+      
+      dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+          clearInterval(slideInterval);
+          const index = parseInt(this.getAttribute('data-index'));
+          showSlide(index);
+          slideInterval = setInterval(nextSlide, intervalTime);
+        });
+      });
+    });
+  </script>
+  
+  <script src="public/js/language.js"></script>
+</body>
+</html>
