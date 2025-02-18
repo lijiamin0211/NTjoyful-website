@@ -3,7 +3,7 @@
       display: flex;
       min-height: calc(100vh - 200px);
       margin-top: 60px; /* 与固定导航留出间隔 */
-      margin-bottom: 50px;
+      margin-Bottom: 50px;
       animation: fadeIn 1s ease-out 0.7s;
       animation-fill-mode: both;
     }
@@ -24,10 +24,10 @@
       font-size: 1rem;
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-Bottom: 1rem;
     }
     .sidebar ul { list-style: none; padding-left: 0; }
-    .sidebar li { margin-bottom: 0.8rem; }
+    .sidebar li { margin-Bottom: 0.8rem; }
     .sidebar li a {
       font-size: 0.9rem;
       font-weight: 500;
@@ -54,7 +54,7 @@
     /* Top Collection Title放右侧 */
     .collection-title {
       text-align: left;
-      margin-bottom: 0px; 
+      margin-Bottom: 0px; 
     }
 
     .collection-title h1 {
