@@ -31,7 +31,7 @@ header {
 
 header.scrolled {
   height: 60px; /* Shrinks the header */
-  background: white; /* Slightly transparent/darker */
+  background: rgba(255, 255, 255, 0.9); /* Slightly transparent/darker */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
