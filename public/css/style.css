@@ -7,7 +7,7 @@
 
 :root {
   --header-height: 60px; /* Initial header height */
-  --accent-color: rgb(207, 62, 62); /* Bright accent color */
+  --accent-color: rgb(199, 138, 65); /* Bright accent color */
   --font-family: 'Montserrat', sans-serif;
 }
 
@@ -23,7 +23,7 @@ header {
   top: 0;
   width: 100%;
   height: var(--header-height);
-  background: #111;
+  background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 100;
   transition: all 0.3s ease-in-out;
@@ -31,7 +31,7 @@ header {
 
 header.scrolled {
   height: 60px; /* Shrinks the header */
-  background: rgba(17, 17, 17, 0.95); /* Slightly transparent/darker */
+  background: white; /* Slightly transparent/darker */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -72,7 +72,7 @@ nav {
 
 .nav-links li a {
   text-decoration: none;
-  color: #fff;
+  color: black;  /* nav 字体颜色*/
   font-weight: 500;
   font-size: 1.2rem;
   transition: color 0.3s;
@@ -93,7 +93,7 @@ nav {
   position: absolute;
   top: 100%;
   left: 0;
-  background: #111;
+  background: white;
   padding: 10px 0;
   min-width: 150px;
   border-radius: 4px;
@@ -541,7 +541,7 @@ footer {
 }
 
 .lang-dropdown a:hover {
-  background: rgb(207, 62, 62);
+  background: rgb(199, 138, 65);
 }
 
 .lang-dropdown img {

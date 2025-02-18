@@ -139,17 +139,24 @@
     .read-more-btn {
       display: inline-block;
       padding: 10px 20px;
-      background: rgb(207, 62, 62); /* gold background */
+      background: rgb(199, 138, 65); /* gold background */
       color: #fff;
       text-decoration: none;
       border-radius: 4px;
       transition: background 0.3s ease;
     }
     .read-more-btn:hover {
-      background: rgb(207, 62, 62);
+      background: rgb(199, 138, 65);
     }
 
     /* Product Section */
+    .product-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* 默认一行显示5列 */
+      gap: 20px; /* 每个格子间距 */
+      max-width: 1200px; /* 设个最大宽度可选 */
+      margin: 0 auto;    /* 水平居中可选 */
+    }
     .products {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -282,7 +289,7 @@
     #contact .btn {
       display: inline-block;
       padding: 10px 20px;
-      background: rgb(207, 62, 62);
+      background: rgb(199, 138, 65);
       color: #fff;
       text-decoration: none;
       border-radius: 4px;
@@ -313,7 +320,7 @@
             <li><a href="product/top.html" data-i18n="product.top">Top</a></li>
             <li><a href="product/dress.html" data-i18n="product.dress">Dress</a></li>
             <li><a href="product/seamless.html" data-i18n="product.seamless">Seamless</a></li>
-            <li><a href="product/coats.html" data-i18n="product.coat">Coat</a></li>
+            <li><a href="product/coats.html" data-i18n="product.coat">Coat & Jacket</a></li>
             <li><a href="product/pants.html" data-i18n="product.pants">Pants</a></li>
           </ul>
         </li>
@@ -444,7 +451,7 @@
       <div class="product">
         <a href="top.html">
           <img src="public/media/Cover/top.JPG" alt="Top" />
-          <h3 data-i18n="product.top">Tops</h3>
+          <h3 data-i18n="product.top">Top</h3>
         </a>
       </div>
       <div class="product">
@@ -462,7 +469,7 @@
       <div class="product">
         <a href="coats.html">
           <img src="public/media/Cover/coat.JPG" alt="Coats" />
-          <h3 data-i18n="product.coat">Coats</h3>
+          <h3 data-i18n="product.coat">Coat & Jacket</h3>
         </a>
       </div>
       <div class="product">
