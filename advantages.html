@@ -454,8 +454,9 @@
   </style>
 </head>
 <body>
-   <!-- Fixed Navigation Header -->
-   <header id="header">
+  <!-- Fixed Navigation Header -->
+  <!-- 桌面版导航 -->
+  <header class="desktop-header">
     <nav>
       <div class="logo">
         <a href="index.html">
@@ -471,17 +472,58 @@
             <li><a href="product/top.html" data-i18n="product.top">Top</a></li>
             <li><a href="product/dress.html" data-i18n="product.dress">Dress</a></li>
             <li><a href="product/seamless.html" data-i18n="product.seamless">Seamless</a></li>
-            <li><a href="product/coats.html" data-i18n="product.coat">Coat</a></li>
+            <li><a href="product/coats.html" data-i18n="product.coat">Coat & Jacket</a></li>
             <li><a href="product/pants.html" data-i18n="product.pants">Bottom</a></li>
           </ul>
         </li>
-        <li>
-          <a href="advantages.html" data-i18n="nav.whyus" class="active">Why Us</a>
-        </li>
+        <li><a href="advantages.html" data-i18n="nav.whyus" class="active">Why Us</a></li>
         <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
       </ul>
     </nav>
   </header>
+
+    <!-- ========== 手机端导航（顶部区域） ========== -->
+    <header class="mobile-header">
+      <nav class="mobile-nav">
+        <div class="logo">
+          <img src="public/media/log_phone.png" alt="Logo">
+        </div>
+        <!-- 汉堡菜单按钮 -->
+        <button class="menu-toggle" aria-label="Toggle Menu">
+          <span class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </nav>
+    </header>
+  
+    <!-- ========== 模糊覆盖层 ========== -->
+    <div class="menu-overlay"></div>
+  
+    <!-- ========== 右侧弹出菜单 ========== -->
+    <div class="mobile-menu">
+      <!-- “X” 关闭按钮 -->
+      <button class="menu-close" aria-label="Close Menu">&times;</button>
+      <ul>
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+        <li class="has-submenu">
+          <a href="products.html" data-i18n="nav.products">Products</a>
+          <ul class="submenu">
+            <li><a href="product/top.html" data-i18n="product.top">Top</a></li>
+            <li><a href="product/dress.html" data-i18n="product.dress">Dress</a></li>
+            <li><a href="product/seamless.html" data-i18n="product.seamless">Seamless</a></li>
+            <li><a href="product/coats.html" data-i18n="product.coat">Coat & Jacket</a></li>
+            <li><a href="product/pants.html" data-i18n="product.pants">Bottom</a></li>
+          </ul>
+        </li>
+        <li><a href="advantages.html" data-i18n="nav.whyus" class="active">Why Us</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+      </ul>
+    </div>
+
   <!-- Language Selector: Fixed at Top-Right Corner -->
   <div class="language-selector">
     <button class="lang-btn">
@@ -886,6 +928,7 @@
       });
     });
   </script>
+  <script src="public/js/main.js"></script>
   <script src="public/js/language.js"></script>
    <!-- Footer -->
    <footer>

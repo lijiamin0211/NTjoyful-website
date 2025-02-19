@@ -298,13 +298,21 @@
     #contact .btn:hover {
       background: #555;
     }
+    /* 移动端覆盖，取消绝对定位 */
+    @media (max-width: 768px) {
+      #about .read-more-btn {
+        position: static !important;  /* 不再使用绝对定位 */
+        margin-top: 20px !important;  /* 给按钮与文字留一些间距 */
+      }
+    }
 
     /* Other sections (Products, etc.) remain unchanged... */
   </style>
 </head>
 <body>
   <!-- Fixed Navigation Header -->
-  <header id="header">
+  <!-- 桌面版导航 -->
+  <header class="desktop-header">
     <nav>
       <div class="logo">
         <a href="index.html">
@@ -312,7 +320,7 @@
         </a>
       </div>
       <ul class="nav-links">
-        <li><a href="index.html" data-i18n="nav.home"  class="active">Home</a></li>
+        <li><a href="index.html" data-i18n="nav.home" class="active">Home</a></li>
         <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
         <li>
           <a href="products.html" data-i18n="nav.products">Products</a>
@@ -324,14 +332,54 @@
             <li><a href="product/pants.html" data-i18n="product.pants">Bottom</a></li>
           </ul>
         </li>
-        <li>
-          <a href="advantages.html" data-i18n="nav.whyus">Why Us</a>
-        </li>
+        <li><a href="advantages.html" data-i18n="nav.whyus">Why Us</a></li>
         <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
       </ul>
     </nav>
   </header>
-  
+
+  <!-- ========== 手机端导航（顶部区域） ========== -->
+  <header class="mobile-header">
+    <nav class="mobile-nav">
+      <div class="logo">
+        <img src="public/media/log_phone.png" alt="Logo">
+      </div>
+      <!-- 汉堡菜单按钮 -->
+      <button class="menu-toggle" aria-label="Toggle Menu">
+        <span class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ========== 模糊覆盖层 ========== -->
+  <div class="menu-overlay"></div>
+
+  <!-- ========== 右侧弹出菜单 ========== -->
+  <div class="mobile-menu">
+    <!-- “X” 关闭按钮 -->
+    <button class="menu-close" aria-label="Close Menu">&times;</button>
+    <ul>
+      <li><a href="index.html" data-i18n="nav.home" class="active">Home</a></li>
+      <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+      <li class="has-submenu">
+        <a href="products.html" data-i18n="nav.products">Products</a>
+        <ul class="submenu">
+          <li><a href="product/top.html" data-i18n="product.top">Top</a></li>
+          <li><a href="product/dress.html" data-i18n="product.dress">Dress</a></li>
+          <li><a href="product/seamless.html" data-i18n="product.seamless">Seamless</a></li>
+          <li><a href="product/coats.html" data-i18n="product.coat">Coat & Jacket</a></li>
+          <li><a href="product/pants.html" data-i18n="product.pants">Bottom</a></li>
+        </ul>
+      </li>
+      <li><a href="advantages.html" data-i18n="nav.whyus">Why Us</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+    </ul>
+  </div>
+
   <!-- Language Selector -->
   <div class="language-selector">
     <button class="lang-btn">

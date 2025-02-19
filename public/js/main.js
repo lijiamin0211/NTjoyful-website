@@ -47,3 +47,55 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 选择菜单按钮和手机端菜单
+    const menuToggleBtn = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    // 如果元素都存在，给按钮绑定点击事件
+    if (menuToggleBtn && mobileMenu) {
+      menuToggleBtn.addEventListener('click', () => {
+        // 切换菜单的 active 类，从而实现显示/隐藏
+        mobileMenu.classList.toggle('active');
+
+        // 如果需要切换汉堡图标变为 X，可以再给按钮本身加一个 class
+        menuToggleBtn.classList.toggle('open');
+      });
+    }
+
+    // 处理子菜单的展开/收起
+    const submenuParents = document.querySelectorAll('.mobile-menu li.has-submenu');
+    submenuParents.forEach(item => {
+      const link = item.querySelector('a');
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        item.classList.toggle('active');
+  });
+});
+});
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menuClose = document.querySelector('.menu-close');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const overlay    = document.querySelector('.menu-overlay');
+
+    // 打开菜单
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      overlay.classList.add('active');
+    });
+
+    // 关闭菜单
+    menuClose.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+
+    // 点击模糊层也可关闭
+    overlay.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  });
+
